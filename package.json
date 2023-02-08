@@ -1,0 +1,30 @@
+{
+  "name": "front-end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.14",
+    "@mui/lab": "^5.0.0-alpha.108",
+    "@mui/material": "^5.10.14",
+    "@mui/x-date-pickers": "^5.0.8",
+    "@walletconnect/web3-provider": "^1.8.0",
+    "dayjs": "^1.11.6",
+    "eslint": "8.28.0",
+    "eslint-config-next": "13.0.4",
+    "ethers": "^5.7.2",
+    "hex2dec": "^1.1.2",
+    "next": "13.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-visibility-sensor": "^5.1.1",
+    "web3modal": "^1.9.9"
+  }
+}
