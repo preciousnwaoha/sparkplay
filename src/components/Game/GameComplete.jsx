@@ -7,8 +7,11 @@ import Paper from "@mui/material/Paper"
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import CrisisAlertRoundedIcon from '@mui/icons-material/CrisisAlertRounded';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import { useRouter } from 'next/router'
 
 const GameComplete = () => {
+    const router = useRouter()
+
   return (
     <Box sx={{
         display: "flex",
@@ -124,7 +127,9 @@ const GameComplete = () => {
             </Grid>
         </Grid>
 
-        <Button variant="contained" sx={{
+        <Button variant="contained" onClick={() => {
+            router.push('/')
+        }} sx={{
             bgcolor: "secondary.color1"
         }}>continue</Button>
     </Box>

@@ -12,6 +12,7 @@ const GameAnswerPopup = ({isCorrect, onContinue}) => {
       onContinue();
     }
 
+    // console.log({isCorrect})
 
   return (
     

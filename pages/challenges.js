@@ -8,26 +8,11 @@ import Typography from "@mui/material/Typography"
 import Game from '../src/components/Game/Game';
 import TopBar from '../src/components/Layout/TopBar';
 import BottomNav from '../src/components/Layout/BottomNav';
-import Level from '../src/components/GameChoice';
-import Unit from '../src/components/Unit';
-import { getGameData } from '../src/libs/utils';
-
-export const getStaticProps = () => {
-  
-  const gameData = getGameData()
-
-  // console.log("gameData", gameData);
-
-  return {
-    props: {
-      gameData,
-    },
-  };
-};
 
 
-const Home = ({gameData}) => {
-  // console.log({gameData})
+
+const Challenges = () => {
+
 
 
 
@@ -44,12 +29,7 @@ const Home = ({gameData}) => {
 
 
         <TopBar />
-
-        <PaddedContainer>
-        <Unit gameData={gameData}/>
-        </PaddedContainer>
         
-
         <BottomNav />
 
         
@@ -58,8 +38,4 @@ const Home = ({gameData}) => {
   )
 }
 
-
-
-
-
-export default Home
+export default Challenges

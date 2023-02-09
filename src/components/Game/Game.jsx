@@ -10,6 +10,7 @@ import GameExitModal from './GameExitModal';
 import GameAnswerPopup from './GameAnswerPopup';
 import GameLoading from './GameLoading';
 import GameComplete from './GameComplete';
+import { useRouter } from 'next/router';
 
 
 
@@ -29,16 +30,14 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 
 
-const Game = () => {
-  const [gamesInLevel, setGamesInLevel] = React.useState(null);
-  const [pointsPerGame, setPointsPerGame] = React.useState(0)
+const Game = ({games=null, pointsPerGame=0, gameId, gameLevel}) => {
+  const router = useRouter()
   const [playerPoints, setPlayerPoints] = React.useState(0);
   const [isCorrect, setIsCorrect] = React.useState(false);
   const [hasAnswered, setHasAnswered] = React.useState(false);
   const [openExitModal, setOpenExitModal] = React.useState(false);
-  const [currentGame, setCurrentGame] = React.useState(null);
-  const [loadingGame, setLoadingGame] = React.useState(true);
-  const [finishedLevel, setFinishedLevel] = React.useState(false);
+  const [currentGame, setCurrentGame] = React.useState(0);
+  const [failedPlays, setFailedPlays] = React.useState([])
 
 
   const handleOpenExitModal = () => setOpenExitModal(true);
@@ -46,11 +45,18 @@ const Game = () => {
   const handleExitGame = () => {console.log("exit")}
 
   const handleAnswer = (_ans) => {
-    console.log(_ans)
 
-    if (_ans === currentGame.component) {
+    if (_ans === games[currentGame].component) {
+      // console.log({_ans})
       setIsCorrect(true);
       setPlayerPoints(prevState => prevState + pointsPerGame)
+    } else {
+      setIsCorrect(false);
+      setFailedPlays(prevState => {
+        if (!prevState.includes(currentGame)) {
+          [...prevState].push(currentGame)
+        }
+      })
     }
     setHasAnswered(true)
   }
@@ -59,52 +65,34 @@ const Game = () => {
     setHasAnswered(false);
       setIsCorrect(false);
 
-    if ((currentGame + 1) == gamesInLevel.length) {
-      setFinishedLevel(true)
+    
+
+    if ((currentGame + 1) === games.length) {
+      if (failedPlays.length !== 0) {
+        // setCurrentGame(games[failedPlays[]])
+      }
+      router.push(`/game/${gameId}/${gameLevel}/complete`)
       return
     }
     setCurrentGame(prev => prev + 1)
   }
 
 
-  React.useEffect(() => {
-      if (loadingGame === true) {
-        const DUMMY_GAMES_DATA = {
-          pointsPerGame: 2,
-          games: [
-          {
-            id: "1234",
-            component: "resistor",
-            image: "x",
-            function: "To resist the flow of current",
-            options: ["resistor", "inductor", "capacitor"]
-          },
-          {
-            id: "1235",
-            component: "diode",
-            image: "x",
-            function: "To resist the flow of current",
-            options: ["diode", "resistor", "inductor", "capacitor"]
-          },
-        ]
-      }
-
-        setGamesInLevel(DUMMY_GAMES_DATA.games)
-        setPointsPerGame(DUMMY_GAMES_DATA.pointsPerGame)
-        setCurrentGame(0)
-        
-        setLoadingGame(false)
-      }
-  }, [loadingGame])
-
- 
-  if (!gamesInLevel) {
+  if  (games === null || games === undefined) {
     return <GameLoading />
   }
  
-  const progressBarValue = (playerPoints / (gamesInLevel.length * pointsPerGame)) * 100
+  if (games.length === 0) {
+    return <Box>
+      No Game
+    </Box>
+  }
+ 
+  const progressBarValue = (playerPoints / (games.length * pointsPerGame)) * 100
 
-  console.log({progressBarValue})
+  // console.log(games)
+
+
 
 
   return (
@@ -146,7 +134,7 @@ const Game = () => {
             fontWeight: 700,
             color: "secondary.main",
             
-          }}>2</Typography>
+          }}>{playerPoints}</Typography>
         </Box>
       </Box>
        <GameExitModal open={openExitModal} onClose={handleCloseExitModal} onExit={handleExitGame} />
@@ -170,11 +158,11 @@ const Game = () => {
                 bgcolor: "secondary.color1",
                 borderBottom: "3px solid #168bc1",
               }}>
-                {gamesInLevel[currentGame].image}
+                {games[currentGame].image}
               </Box>
           </Box>
             
-            <GameOptions options={gamesInLevel[currentGame].options} onAnswer={handleAnswer} hasAnswered={hasAnswered} />
+            <GameOptions options={games[currentGame].options} onAnswer={handleAnswer} hasAnswered={hasAnswered} />
             
            {hasAnswered && <GameAnswerPopup isCorrect={isCorrect} onContinue={handleNext} />}
             

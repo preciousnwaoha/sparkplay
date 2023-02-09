@@ -5,11 +5,13 @@ import Head from 'next/head'
 import PaddedContainer from '../src/components/Layout/PaddedContainer'
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
-import GameComplete from '../src/components/Game/GameComplete';
+import Game from '../src/components/Game/Game';
+import TopBar from '../src/components/Layout/TopBar';
+import BottomNav from '../src/components/Layout/BottomNav';
 
 
 
-const Home = () => {
+const Achievements = () => {
 
 
 
@@ -26,11 +28,9 @@ const Home = () => {
         </Head>
 
 
-        <PaddedContainer>
-
-        <GameComplete />
-
-        </PaddedContainer>
+        <TopBar />
+        
+        <BottomNav />
 
         
 
@@ -38,4 +38,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Achievements

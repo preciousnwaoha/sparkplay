@@ -1,0 +1,20 @@
+{
+    "123": {
+        "name": "Cicuitry 1",
+        "color": "color1",
+        "image": "x",
+        "subLevels": 3
+    },
+    "124": {
+        "name": "Cicuitry 2",
+        "color": "color1",
+        "image": "x",
+        "subLevels": 3
+    },
+    "125": {
+        "name": "Cicuitry 3",
+        "color": "color1",
+        "image": "x",
+        "subLevels": 3
+    }
+}

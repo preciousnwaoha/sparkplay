@@ -48,18 +48,43 @@ let theme = createTheme({
   },
 
 
- 
-  // grey: {
-  //     "#4b4b4b",
-  //     "#777777",
-  //     "#afafaf",
-  //     "#e5e5e5",
-  //     "#f7f7f7",
-  //     "#ffffff",
-  // }
 });
 
 theme = createTheme(theme, {
+    palette: {
+        color1: {
+            dark: "#1cb0f6",
+            main: "#1cb0f6",
+            light: "#1cb0f6",
+            fade: "#1cb0f6",
+        },
+        color2: {
+            dark: "#ff4b4b",
+            main: "#ff4b4b",
+            light: "#ff4b4b",
+            fade: "#ff4b4b",
+        },
+        color3: {
+            dark: "#ce82ff",
+            main: "#ce82ff",
+            light: "#ce82ff",
+            fade: "#ce82ff",
+        },
+        color4: {
+            dark: "#2b70c9",
+            main: "#2b70c9",
+            light: "#2b70c9",
+            fade: "#2b70c9",
+        },
+        grey: {
+            gray1: "#4b4b4b",
+            gray2: "#777777",
+            gray3: "#afafaf",
+            gray4: "#e5e5e5",
+            gray5: "#f7f7f7",
+            gray5: "#ffffff",
+        }
+    },
     typography: {
         fontFamily: font2,
         
@@ -111,6 +136,14 @@ theme = createTheme(theme, {
   components: {
     MuiCssBaseline: {
       styleOverrides: `
+            html: {
+                box-sizing: border-box;
+            }
+
+            *, *::after, *::before {
+                box-sizing: inherit;
+            }
+
           a: {
           text-decoration: "none"
           }
@@ -138,6 +171,9 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
             borderRadius: "12px",
+            fontSize: "1rem",
+            fontWeight: 700,
+            my: 1,
         },
         text: {
           color: "#1cb0f6"
