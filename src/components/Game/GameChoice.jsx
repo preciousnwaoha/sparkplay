@@ -12,6 +12,9 @@ import Link from "next/link"
 // import { useRouter } from "next/router";
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
+import UIfx from 'uifx'; 
+// import tickAudio from '../../../public/assets/sfx/interface-2.mp3';
+// const tick = new UIfx({asset: tickAudio});
 
 const GameChoiceCircularProgress = styled(CircularProgress)(({ theme }) => ({
   borderRadius: 5,
@@ -55,7 +58,9 @@ export default function GameChoice({name, id, image, color}) {
 
     const handleOpenPopover = (event) => {
       setAnchorEl(event.currentTarget);
-
+      // if (!!document) {
+      //   tick.volume(0.8).play()
+      //   }
     };;
 
     const handleClosePopover = () => {
