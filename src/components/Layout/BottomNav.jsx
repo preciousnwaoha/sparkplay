@@ -14,8 +14,14 @@ import CampaignOutlinedIcon from '@mui/icons-material/CampaignOutlined';
 import CampaignRoundedIcon from '@mui/icons-material/CampaignRounded';
 import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
 import EmojiEventsRoundedIcon from "@mui/icons-material/EmojiEventsRounded";
+import { useRouter } from "next/router";
 
 const BottomNav = () => {
+
+  const router = useRouter()
+
+  // console.log(router.pathname)
+  
   return (
     <Box
       sx={{
@@ -26,6 +32,7 @@ const BottomNav = () => {
         borderTop: "2px solid",
         borderColor: "grey.gray4",
         py: 2,
+        bgcolor: "background.paper"
       }}
     >
       <PaddedContainer>
@@ -38,11 +45,11 @@ const BottomNav = () => {
           }}
         >
           <Link href="/">
-            <HomeOutlinedIcon
+            {(router.pathname === "/") ? <HomeRoundedIcon
               sx={{
                 mr: 0.5,
-                color: "grey.gray3",
-                fontWeight: 700,
+                color: "secondary.dark",
+                fontWeight: 200,
                 fontSize: "1.75rem",
                 cursor: "pointer",
 
@@ -50,15 +57,27 @@ const BottomNav = () => {
                   color: "secondary.dark",
                 },
               }}
-            />
-          </Link>
-
-          <Link href="/profile">
-            <Face4OutlinedIcon
+            /> :  <HomeOutlinedIcon
               sx={{
                 mr: 0.5,
                 color: "grey.gray3",
-                fontWeight: 700,
+                fontWeight: 200,
+                fontSize: "1.75rem",
+                cursor: "pointer",
+
+                "&:hover": {
+                  color: "secondary.dark",
+                },
+              }}
+            />}
+          </Link>
+
+          <Link href="/profile">
+           {( ["/profile", "/profile/settings"].includes(router.pathname)) ? <Face4RoundedIcon
+              sx={{
+                mr: 0.5,
+                color: "secondary.color3",
+                fontWeight: 200,
                 fontSize: "1.75rem",
                 cursor: "pointer",
 
@@ -66,15 +85,27 @@ const BottomNav = () => {
                   color: "secondary.color3",
                 },
               }}
-            />
-          </Link>
-
-          {/* <Link href="/challenges">
-            <ShieldOutlinedIcon
+            /> : <Face4OutlinedIcon
               sx={{
                 mr: 0.5,
                 color: "grey.gray3",
-                fontWeight: 700,
+                fontWeight: 200,
+                fontSize: "1.75rem",
+                cursor: "pointer",
+
+                "&:hover": {
+                  color: "secondary.color3",
+                },
+              }}
+            />}
+          </Link>
+
+          {/* <Link href="/challenges">
+            {(router.pathname === "/challenges") ? <ShieldRoundedIcon
+              sx={{
+                mr: 0.5,
+                color: "secondary.main",
+                fontWeight: 200,
                 fontSize: "1.75rem",
                 cursor: "pointer",
 
@@ -82,15 +113,38 @@ const BottomNav = () => {
                   color: "secondary.main",
                 },
               }}
-            />
+            /> : <ShieldOutlinedIcon
+              sx={{
+                mr: 0.5,
+                color: "grey.gray3",
+                fontWeight: 200,
+                fontSize: "1.75rem",
+                cursor: "pointer",
+
+                "&:hover": {
+                  color: "secondary.main",
+                },
+              }}
+            />}
           </Link> */}
 
               {/* <Link href="/achievements">
-              <EmojiEventsOutlinedIcon
+             {(router.pathname === "/achievements") ? <EmojiEventsRoundedIcon
+            sx={{
+              mr: 0.5,
+              color:  "secondary.color2",
+              fontWeight: 200,
+              fontSize: "1.75rem",
+              cursor: "pointer",
+
+              "&:hover": {
+                color: "secondary.color2",
+              },
+            }} /> : <EmojiEventsOutlinedIcon
             sx={{
               mr: 0.5,
               color: "grey.gray3",
-              fontWeight: 700,
+              fontWeight: 200,
               fontSize: "1.75rem",
               cursor: "pointer",
 
@@ -98,15 +152,27 @@ const BottomNav = () => {
                 color: "secondary.color2",
               },
             }}
-          />
+          />}
               </Link> */}
 
               <Link href="/feed">
-            <CampaignOutlinedIcon
+           { (router.pathname === "/feed") ? <CampaignRoundedIcon
+              sx={{
+                mr: 0.5,
+                color: "color2.main",
+                fontWeight: 200,
+                fontSize: "1.75rem",
+                cursor: "pointer",
+
+                "&:hover": {
+                  color: "color3.main",
+                },
+              }}
+            /> : <CampaignOutlinedIcon
               sx={{
                 mr: 0.5,
                 color: "grey.gray3",
-                fontWeight: 700,
+                fontWeight: 200,
                 fontSize: "1.75rem",
                 cursor: "pointer",
 
@@ -114,7 +180,7 @@ const BottomNav = () => {
                   color: "secondary.main",
                 },
               }}
-            />
+            />}
           </Link>
           
         </Box>

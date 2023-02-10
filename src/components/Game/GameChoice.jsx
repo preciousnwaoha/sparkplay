@@ -7,6 +7,11 @@ import Paper from "@mui/material/Paper";
 import CircularProgress, {
   circularProgressClasses,
 } from "@mui/material/CircularProgress";
+import GameTip from "./GameTip";
+import Link from "next/link"
+// import { useRouter } from "next/router";
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
 
 const GameChoiceCircularProgress = styled(CircularProgress)(({ theme }) => ({
   borderRadius: 5,
@@ -36,7 +41,19 @@ const GameChoiceCircularProgress = styled(CircularProgress)(({ theme }) => ({
 export default function GameChoice({name, id, image, color}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const handleClick = (event) => {
+    const [gameTipAnchorState, setGameTipAnchorState] = React.useState(false)
+
+
+
+  const toggleGameTip = (open) => {
+    console.log("red")
+    setGameTipAnchorState(open);
+  };
+
+  
+
+
+    const handleOpenPopover = (event) => {
       setAnchorEl(event.currentTarget);
 
     };;
@@ -52,7 +69,7 @@ export default function GameChoice({name, id, image, color}) {
   return (
     
     <>
-    <Box aria-describedby={popoverId} onClick={handleClick} sx={{
+    <Box aria-describedby={popoverId} onClick={handleOpenPopover} sx={{
         display: "flex", 
         flexDirection: "column",
         alignItems: "center", 
@@ -95,7 +112,23 @@ export default function GameChoice({name, id, image, color}) {
     }}>{name}</Typography>
    
     </Box >
-    <GameChoicePopup open={open} anchorEl={anchorEl} popoverId={popoverId} gameId={id} gameName={name} gameImage={image} onClose={handleClosePopover} gameColor={color} />
+    <GameChoicePopup open={open} anchorEl={anchorEl} popoverId={popoverId} gameId={id} gameName={name} gameImage={image} onClose={handleClosePopover} gameColor={color} onToggleGameTip={toggleGameTip} />
+
+    <Drawer
+            anchor={"right"}
+            open={gameTipAnchorState}
+          >
+      <Box
+        sx={{ 
+          width: "100vw",
+        //  border: "2px solid red"
+        }}
+        role="presentation"
+      >
+        <GameTip gameId={id} gameName={name} gameImage={image} gameColor={color} onToggleGameTip={toggleGameTip} />
+      </Box>
+    </Drawer>
+    
     </>
   );
 }

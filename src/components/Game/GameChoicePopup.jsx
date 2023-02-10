@@ -5,12 +5,19 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useRouter } from 'next/router';
+import GameTip from './GameTip';
 
-export default function GameChoicePopup({open, anchorEl, popoverId, gameId, gameName, gameImage, gameColor, onClose }) {
+export default function GameChoicePopup({ open, anchorEl, popoverId, onToggleGameTip, gameId, gameName, gameImage, gameColor, onClose }) {
   const router = useRouter()
     
     const handleClose = () => {
         onClose()
+    }
+
+    const handleClickedTips = () => {
+      console.log("green")
+      onClose()
+      onToggleGameTip(true)
     }
 
     let level = 1
@@ -36,11 +43,21 @@ export default function GameChoicePopup({open, anchorEl, popoverId, gameId, game
             vertical: 'top',
             horizontal: 'center',
           }}
+        
+          sx={{
+            bgcolor: "transparent",
+            boxShadow: 0,
+            borderRadius: "14px",
 
+            "& div": {
+              borderRadius: "14px",
+            }
+          }}
           
       >
         <Box sx={{
-            width: "calc(100vw - 4rem)",
+            width: {xs: "calc(100vw - 4rem)", md: "400px"},
+            maxWidth: "400px",
             bgcolor: `${gameColor}.dark`,
             p: 2,
             borderRadius: "14px",
@@ -49,7 +66,9 @@ export default function GameChoicePopup({open, anchorEl, popoverId, gameId, game
                 fontWeight: 700,
                 color: "common.white",
              }}>Level 1</Typography>
-             <Button varant="contained" sx={{
+             <Button aria-label="view game tips"
+              aria-controls="menu-appbar"
+              aria-haspopup="true" varant="contained" onClick={handleClickedTips} sx={{
                 my: 1,
                 width: "100%",
                 bgcolor: `${gameColor}.dark`,

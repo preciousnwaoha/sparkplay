@@ -130,7 +130,11 @@ const GameComplete = () => {
         <Button variant="contained" onClick={() => {
             router.push('/')
         }} sx={{
-            bgcolor: "secondary.color1"
+            bgcolor: "color1.main",
+
+            "&:hover": {
+                bgcolor: "color1.dark"
+            }
         }}>continue</Button>
     </Box>
   )

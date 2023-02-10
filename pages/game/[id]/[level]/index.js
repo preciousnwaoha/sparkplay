@@ -6,7 +6,7 @@ import PaddedContainer from '../../../../src/components/Layout/PaddedContainer'
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import Game from '../../../../src/components/Game/Game';
-import { getLevelData, getAllLevelsPaths } from '../../../../src/libs/utils';
+import { getLevelData, getAllLevelsPaths, shuffle } from '../../../../src/libs/utils';
 
 export const getStaticPaths = () => {
     const paths = getAllLevelsPaths()
@@ -55,7 +55,7 @@ const Level = ({levelData, gameLevel, gameId}) => {
 
         <PaddedContainer>
 
-        <Game games={levelData.games} pointsPerGame={levelData.pointsPerGame}gameId={gameId} gameLevel={gameLevel}/>
+        <Game games={shuffle(levelData.games)} pointsPerGame={levelData.pointsPerGame}gameId={gameId} gameLevel={gameLevel}/>
 
         </PaddedContainer>
 

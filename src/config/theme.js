@@ -144,7 +144,7 @@ theme = createTheme(theme, {
                 box-sizing: inherit;
             }
 
-          a: {
+          a {
           text-decoration: "none"
           }
         `,

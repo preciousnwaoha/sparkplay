@@ -3,7 +3,7 @@ import Box from "@mui/material/Box"
 import Paper from "@mui/material/Paper"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import GameChoice from './GameChoice'
+import GameChoice from './Game/GameChoice'
 
 
 
@@ -30,7 +30,7 @@ const Unit = ({gameData = []}) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        border: 1,
+        // border: 1,
         px: 3,
         py: 2,
         textAlign: "center",

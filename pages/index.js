@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography"
 import Game from '../src/components/Game/Game';
 import TopBar from '../src/components/Layout/TopBar';
 import BottomNav from '../src/components/Layout/BottomNav';
-import Level from '../src/components/GameChoice';
 import Unit from '../src/components/Unit';
 import { getGameData } from '../src/libs/utils';
 

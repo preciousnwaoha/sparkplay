@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/router';
 
 const style = {
   position: 'absolute',
@@ -23,11 +22,9 @@ const style = {
   border: "none",
 };
 
-export default function GameExitModal({open, onClose, onExit}) {
-  const router  = useRouter()
+export default function DarkModeModal({open, onClose, }) {
   
   const handleClose = () => onClose();
-  const handleExit = () => router.push("/");
 
   return (
     <div>
@@ -47,21 +44,21 @@ export default function GameExitModal({open, onClose, onExit}) {
             <Typography id="transition-modal-title" variant="h6" component="h4" sx={{
                 mt: 0,
             }}>
-              Are you sure about that?
+              Dark mode
             </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 1, mb: 3 }}>
-              All progress in this lesson will be lost.
+
+            <Typography id="transition-modal-title" variant="body1"  sx={{
+                mt: 0,
+            }}>
+              Feature Coming Soon!
             </Typography>
+            
 
             <Grid container item justifyContent="flex-end">
             <Button variant="text" onClick={handleClose} sx={{
                 fontSize: "1rem",
                 color: "text.primary",
             }}>cancel</Button>
-            <Button  variant="text" onClick={handleExit} sx={{
-                fontSize: "1rem",
-                color: "text.primary",
-            }}>quit</Button>
             </Grid>
             
           </Box>

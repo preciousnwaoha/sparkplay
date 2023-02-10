@@ -1,51 +1,17 @@
-  // unit => game => level
-const DUMMY_GAMES = {
-  "123": {
-      name: "Cicuitry 1",
-      color: "color3",
-      image: "x",
-      subLevels: 3
-  },
-  "124": {
-      name: "Cicuitry 2",
-      color: "secondary",
-      image: "x",
-      subLevels: 3
-  },
-  "125": {
-      name: "Cicuitry 3",
-      color: "color2",
-      image: "x",
-      subLevels: 3
-  }
-}
 
-const DUMMY_GAME_DATA = {
-  pointsPerGame: 2,
-  games: [
-  {
-    id: "1234",
-    component: "resistor",
-    image: "x",
-    function: "To resist the flow of current",
-    options: ["resistor", "inductor", "capacitor"],
-    answer: 0,
-    question: "What does this represent?"
-  },
-  {
-    id: "1235",
-    component: "diode",
-    image: "x",
-    function: "To resist the flow of current",
-    options: ["diode", "resistor", "inductor", "capacitor"],
-    answer: 0,
-    question: "What does this represent?",
-  },
-  ]
-}
+import DevPic from "../../public/assets/imgs/dev-1.jpg"
+import WallPic from "../../public/assets/imgs/wall2.png"
+import AbsPic from "../../public/assets/imgs/abs.jpg"
 
 
+import { DUMMY_FEEDS, DUMMY_GAMES, DUMMY_GAME_DATA } from "./data"
 
+
+/**
+ * GAME
+ */
+
+// unit => game => 
 
 export const getGameData = () => {
   // const response  = await fetch("levels-data.json", {
@@ -110,18 +76,7 @@ export const getLevelsQuestions = async () => {
  * FEED
  */
 
-let DUMMY_FEEDS = {
-  "123": {
-    title: "Delevoper",
-    text: "recious Nwoaha",
-    date: "Day 01",
-    image: "x",
-    link: {
-      text: "Github",
-      url: "https://github.com/preciousnwaoha",
-    },
-  }
-}
+
 
 export const getFeedPaths = () => {
   return
@@ -137,4 +92,25 @@ export const getAllFeeds = () => {
   })
 
   return DUMMY_FEEDSFomatted
+}
+
+
+// helpers
+
+export const shuffle = (array) => {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array
 }
