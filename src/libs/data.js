@@ -43,19 +43,19 @@ export const DUMMY_GAMES = {
       name: "Cicuitry 1",
       color: "color3",
       image: "/assets/imgs/levels/engineer-2.png",
-      subLevels: 3
+      subLevels: 1
   },
   "2": {
       name: "Cicuitry 2",
       color: "secondary",
       image: "/assets/imgs/levels/tech-brain-1.png",
-      subLevels: 3
+      subLevels: 1
   },
   "3": {
       name: "Cicuitry 3",
       color: "color2",
       image: "/assets/imgs/levels/repair-2.png",
-      subLevels: 3
+      subLevels: 1
   }
 }
 
