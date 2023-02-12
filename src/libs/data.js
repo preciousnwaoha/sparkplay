@@ -63,7 +63,7 @@ export const DUMMY_GAME_DATA = {
   "unit-1": {
     "game-1": {
       "level-1": {
-          answerOptions: ["wire", "connected wires", "unconnected wires", "switch", "ac supply", "input bus line", "output bus line", "terminal", "bus line", "Push Button (Normally Open)", "Push Button (Normally Closed)", "SPST Switch", "SPDT Switch", "DPST Switch", "DPDT Switch", "relay switch", "ac supply", "dc supply", "Constant Current Source", "Single Cell Battery", "multi Cell Battery", "Sinusoidal Generator", "pulse Generator", "triangular Generator"],
+          answerOptions: ["wire", "connected wires", "unconnected wires", "switch", "ac supply", "input bus line", "output bus line", "terminal", "bus line", "Push Button (Normally Open)", "Push Button (Normally Closed)", "SPST Switch", "SPDT Switch", "DPST Switch", "DPDT Switch", "relay switch", "dc supply", "Constant Current Source", "Single Cell Battery", "multi Cell Battery", "Sinusoidal Generator", "pulse Generator", "triangular Generator"],
           pointsPerGame: 2,
           games: [
             {
@@ -115,7 +115,7 @@ export const DUMMY_GAME_DATA = {
 
     "game-2": {
       "level-1": {
-        answerOptions: ["wire", "connected wires", "unconnected wires", "switch", "ac supply", "input bus line", "output bus line", "terminal", "bus line", "Push Button (Normally Open)", "Push Button (Normally Closed)", "SPST Switch", "SPDT Switch", "DPST Switch", "DPDT Switch", "relay switch", "ac supply", "dc supply", "Constant Current Source", "Single Cell Battery", "multi Cell Battery", "Sinusoidal Generator", "pulse Generator", "triangular Generator"],
+        answerOptions: ["wire", "connected wires", "unconnected wires", "switch", "ac supply", "input bus line", "output bus line", "terminal", "bus line", "Push Button (Normally Open)", "Push Button (Normally Closed)", "SPST Switch", "SPDT Switch", "DPST Switch", "DPDT Switch", "relay switch", "dc supply", "Constant Current Source", "Single Cell Battery", "multi Cell Battery", "Sinusoidal Generator", "pulse Generator", "triangular Generator"],
           pointsPerGame: 2,
           games: [
             {
@@ -173,7 +173,7 @@ export const DUMMY_GAME_DATA = {
 
     "game-3": {
       "level-1": {
-        answerOptions: ["wire", "connected wires", "unconnected wires", "switch", "ac supply", "input bus line", "output bus line", "terminal", "bus line", "Push Button (Normally Open)", "Push Button (Normally Closed)", "SPST Switch", "SPDT Switch", "DPST Switch", "DPDT Switch", "relay switch", "ac supply", "dc supply", "Constant Current Source", "Single Cell Battery", "multi Cell Battery", "Sinusoidal Generator", "pulse Generator", "triangular Generator"],
+        answerOptions: ["wire", "connected wires", "unconnected wires", "switch", "ac supply", "input bus line", "output bus line", "terminal", "bus line", "Push Button (Normally Open)", "Push Button (Normally Closed)", "SPST Switch", "SPDT Switch", "DPST Switch", "DPDT Switch", "relay switch", "dc supply", "Constant Current Source", "Single Cell Battery", "multi Cell Battery", "Sinusoidal Generator", "pulse Generator", "triangular Generator"],
         pointsPerGame: 7,
         games: [
           {

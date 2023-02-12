@@ -27,7 +27,7 @@ export default function GameExitModal({open, onClose, onExit}) {
   const router  = useRouter()
   
   const handleClose = () => onClose();
-  const handleExit = () => router.push("/");
+  const handleExit = () => onExit();
 
   return (
     <div>

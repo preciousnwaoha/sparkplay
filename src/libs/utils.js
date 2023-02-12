@@ -133,3 +133,16 @@ export function shuffle (array) {
 
   return newArr
 }
+
+
+export function formatTime(_stamp) {
+  var hours = Math.floor(_stamp / 60 / 60)
+
+  var minutes = Math.floor(_stamp / 60) - (hours * 60)
+  var seconds = Math.floor(_stamp % 60)
+
+  var formatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+
+  return formatted
+
+}

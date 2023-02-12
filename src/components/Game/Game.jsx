@@ -48,11 +48,14 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
   const [hasAnswered, setHasAnswered] = React.useState(false);
   const [openExitModal, setOpenExitModal] = React.useState(false);
   const [failedPlays, setFailedPlays] = React.useState([]);
+  const [missedPoints, setMissedPoints] = React.useState(0);
 
   const handleOpenExitModal = () => setOpenExitModal(true);
   const handleCloseExitModal = () => setOpenExitModal(false);
   const handleExitGame = () => {
-    console.log("exit");
+    dispatch(currentLevelActions.reset())
+    router.push("/game")
+
   };
 
   const handleAnswer = (_ans) => {
@@ -61,12 +64,13 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
       // console.log({_ans})
       dispatch(sfxActions.playSfx("answer-correct"))
       setIsCorrect(true);
-      dispatch(currentLevelActions.update({
-        time: 122,
-      }))
+      dispatch(currentLevelActions.update() )
+      
+
     } else {
       dispatch(sfxActions.playSfx("answer-wrong"))
       setIsCorrect(false);
+      setMissedPoints(prev => prev + 1)
       setFailedPlays((prevState) => {
         if (!prevState.includes(currentGame)) {
           return [...prevState, currentGame];
@@ -77,8 +81,7 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
   };
 
   const handleNext = () => {
-    setHasAnswered(false);
-    setIsCorrect(false);
+    
 
     if (currentGame + 1 === games.length) {
       if (failedPlays.length !== 0) {
@@ -89,7 +92,9 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
       router.push(`/game/${gameId}/${gameLevel}/complete`);
       return;
     }
-    dispatch(currentLevelActions.handleNext())
+    setHasAnswered(false);
+    setIsCorrect(false);
+    dispatch(currentLevelActions.nextGame())
   };
 
   useEffect(() => {
@@ -101,7 +106,7 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
       return ;
     }
     dispatch(currentLevelActions.togglePlaying())
-    dispatch(currentLevelActions.initalSetup({pointsPerGame, numberOfGamesInLevel: games.length, averageTime: (5000 * 60)}))
+    dispatch(currentLevelActions.initalSetup({pointsPerGame, numberOfGamesInLevel: games.length, averageTime: (100000)}))
 
 
   }, [games, pointsPerGame, dispatch])
@@ -121,9 +126,11 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
   
 
   const progressBarValue =
-    (playerPoints / (games.length * pointsPerGame)) * 100;
+    ((playerPoints + (missedPoints * pointsPerGame) )/ (games.length * pointsPerGame)) * 100;
 
   const gameOptions = getLevelGameOptions(gameId, gameLevel, games[currentGame].component)
+
+  console.log(games[currentGame], currentGame, games.length)
 
   return (
     <Box

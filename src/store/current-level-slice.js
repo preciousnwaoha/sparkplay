@@ -7,8 +7,7 @@ const currentLevelSlice = createSlice( {
         
         startTime: 0,
         averageTime: 0,
-        endTime: 0,
-        
+
         points: 0,
         pointsPerGame: 0,
         numberOfGamesInLevel : 0,
@@ -22,7 +21,6 @@ const currentLevelSlice = createSlice( {
     reducers: {
         update(state) {
             state.points += state.pointsPerGame
-            state.endTime = Date.now()
         },
         initalSetup(state, action) {
             
@@ -32,9 +30,10 @@ const currentLevelSlice = createSlice( {
             state.averageTime = Date.now() + action.payload.averageTime
         },
         getCalculateValues(state) {
-            state.timeElapsed = state.endTime - state.startTime 
+            let endTime = Date.now()
+            state.timeElapsed = endTime - state.startTime 
 
-            let timeScore = (state.endTime - state.startTime) / state.averageTime * 100
+            let timeScore = (endTime - state.startTime) / state.averageTime * 100
             let pointsScore = state.points / (state.pointsPerGame * state.numberOfGamesInLevel) * 100
 
             state.score = (timeScore + pointsScore) / 200 * 100
@@ -45,6 +44,21 @@ const currentLevelSlice = createSlice( {
         },
         nextGame(state) {
             state.currentGame = state.currentGame + 1
+        },
+        reset (state) {
+            state.startTime = 0
+            state.averageTime = 0
+            state.endTime = 0
+            
+            state.points = 0
+            state.pointsPerGame = 0
+            state.numberOfGamesInLevel  = 0
+    
+            state.playing = false
+            state.currentGame = 0
+    
+            state.timeElapsed = 0
+            state.score = 0
         }
         
     }

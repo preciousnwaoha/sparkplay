@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Image from "next/image"
 import { useDispatch, useSelector } from "react-redux"
 import { sfxActions } from "../../store/sfx-slice";
 import { currentLevelActions } from "../../store/current-level-slice";
@@ -11,6 +12,8 @@ import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import CrisisAlertRoundedIcon from '@mui/icons-material/CrisisAlertRounded';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import { useRouter } from 'next/router'
+import { formatTime } from '../../libs/utils';
+import winPic from "../../../public/assets/imgs/celebrate-1.png"
 
 const GameComplete = () => {
     const dispatch = useDispatch()
@@ -21,7 +24,7 @@ const GameComplete = () => {
     const  {points, score, playing, timeElapsed } = currentLevel
 
     const handleContinue = () => {
-        dispatch(currentLevelActions.togglePlaying())
+        dispatch(currentLevelActions.reset())
         router.push('/game')
     }
 
@@ -46,8 +49,16 @@ const GameComplete = () => {
             fontWeight: 800,
         }}>Practice complete!</Typography>
 
-        <Box>
+        <Box sx={{
+            // border: 1,
+            position: "relative",
+            height: "200px",
 
+            "& img": {
+                objectFit: "contain"
+            }
+        }}>
+            <Image src={winPic} alt="Congratulations it's a new win" fill />
         </Box>
 
         <Grid container spacing={2} >
@@ -109,7 +120,7 @@ const GameComplete = () => {
                         fontWeight: 700,
                         color: "secondary.color1"
                     }}>
-                        <AccessTimeRoundedIcon /> {`${timeElapsed}`}
+                        <AccessTimeRoundedIcon /> {formatTime(timeElapsed / 1000)}
                     </Box>
                 </Paper>
             </Grid> 
@@ -141,7 +152,7 @@ const GameComplete = () => {
                         fontWeight: 700,
                         color: "primary.dark"
                     }}>
-                     <CrisisAlertRoundedIcon  /> {score}%
+                     <CrisisAlertRoundedIcon  /> {score.toFixed(1)}%
                     </Box>
                 </Paper>
             </Grid>
