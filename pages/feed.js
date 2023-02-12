@@ -26,9 +26,8 @@ const Feed = ({ feeds }) => {
   return (
     <div>
       <Head>
-        <title></title>
-        <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
+      <title>Feed | Sparkplay</title>
+          <meta name="description" content="See information on news, updates and other stuff happening with Sparkplay" />
       </Head>
 
       <GameHeader>

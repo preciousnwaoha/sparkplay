@@ -44,8 +44,8 @@ const BottomNav = () => {
             py: 1,
           }}
         >
-          <Link href="/">
-            {(router.pathname === "/") ? <HomeRoundedIcon
+          <Link href="/game">
+            {(router.pathname === "/game") ? <HomeRoundedIcon
               sx={{
                 mr: 0.5,
                 color: "secondary.dark",

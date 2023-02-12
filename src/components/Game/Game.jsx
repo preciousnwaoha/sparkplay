@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import Image from "next/image"
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
@@ -15,6 +16,9 @@ import GameLoading from "./GameLoading";
 import GameComplete from "./GameComplete";
 import { useRouter } from "next/router";
 import Pic1 from "../../../public/assets/imgs/circuit-components/wire.png"
+import { sfxActions } from "../../store/sfx-slice";
+import { currentLevelActions } from "../../store/current-level-slice";
+import { getLevelGameOptions } from "../../libs/utils";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 14,
@@ -34,12 +38,15 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
+  const dispatch = useDispatch()
+  const currentLevel = useSelector(state => state.currentLevel)
+
+  const { points: playerPoints, currentGame } = currentLevel;
+
   const router = useRouter();
-  const [playerPoints, setPlayerPoints] = React.useState(0);
   const [isCorrect, setIsCorrect] = React.useState(false);
   const [hasAnswered, setHasAnswered] = React.useState(false);
   const [openExitModal, setOpenExitModal] = React.useState(false);
-  const [currentGame, setCurrentGame] = React.useState(0);
   const [failedPlays, setFailedPlays] = React.useState([]);
 
   const handleOpenExitModal = () => setOpenExitModal(true);
@@ -49,11 +56,16 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
   };
 
   const handleAnswer = (_ans) => {
-    if (_ans === games[currentGame].component) {
+  
+    if (_ans.toLowerCase() === games[currentGame].component.toLowerCase() ) {
       // console.log({_ans})
+      dispatch(sfxActions.playSfx("answer-correct"))
       setIsCorrect(true);
-      setPlayerPoints((prevState) => prevState + pointsPerGame);
+      dispatch(currentLevelActions.update({
+        time: 122,
+      }))
     } else {
+      dispatch(sfxActions.playSfx("answer-wrong"))
       setIsCorrect(false);
       setFailedPlays((prevState) => {
         if (!prevState.includes(currentGame)) {
@@ -72,11 +84,27 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
       if (failedPlays.length !== 0) {
         // setCurrentGame(games[failedPlays[]])
       }
+
+      dispatch(currentLevelActions.getCalculateValues())
       router.push(`/game/${gameId}/${gameLevel}/complete`);
       return;
     }
-    setCurrentGame((prev) => prev + 1);
+    dispatch(currentLevelActions.handleNext())
   };
+
+  useEffect(() => {
+    if (games === null || games === undefined) {
+      return 
+    }
+  
+    if (games.length === 0) {
+      return ;
+    }
+    dispatch(currentLevelActions.togglePlaying())
+    dispatch(currentLevelActions.initalSetup({pointsPerGame, numberOfGamesInLevel: games.length, averageTime: (5000 * 60)}))
+
+
+  }, [games, pointsPerGame, dispatch])
 
   if (games === null || games === undefined) {
     return <GameLoading />;
@@ -84,12 +112,18 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
 
   if (games.length === 0) {
     return <Box>No Game</Box>;
+
   }
+
+  
+  // console.log(games[currentGame], currentGame)
+  // console.log(games)
+  
 
   const progressBarValue =
     (playerPoints / (games.length * pointsPerGame)) * 100;
 
-  // console.log(games)
+  const gameOptions = getLevelGameOptions(gameId, gameLevel, games[currentGame].component)
 
   return (
     <Box
@@ -182,14 +216,14 @@ const Game = ({ games = null, pointsPerGame = 0, gameId, gameLevel }) => {
         >
           <Image
             src={`/assets/imgs/circuit-components/${games[currentGame].image}.png`}
-            alt={games[currentGame].component}
+            alt={games[currentGame].component.toLowerCase()}
             fill
           />
         </Box>
       </Box>
 
       <GameOptions
-        options={games[currentGame].options}
+        options={gameOptions}
         onAnswer={handleAnswer}
         hasAnswered={hasAnswered}
       />

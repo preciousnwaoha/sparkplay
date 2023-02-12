@@ -22,6 +22,8 @@ export const getStaticProps = ({ params }) => {
     // console.log("params", params);
     
       const gameData = getGameByID(params.id)
+
+
   
     
       return {
@@ -41,8 +43,8 @@ const Complete = ({gameData, gameId, gameLevel}) => {
       <div>
 
         <Head>
-          <title></title>
-          <meta name="description" content="" />
+          <title>Completed Game | Sparkplay</title>
+          <meta name="description" content={`You've completed Level ${gameLevel} of ${gameData.name} on Sparkplay`} />
           <link rel="icon" href="/favicon.ico" />
         </Head>
 

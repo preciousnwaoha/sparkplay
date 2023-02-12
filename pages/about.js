@@ -7,9 +7,8 @@ const About = () => {
   return (
     <>
       <Head>
-        <title></title>
-        <meta name="description" content="" />
-        <link rel="icon" href="/favicon.ico" />
+      <title>About | Sparkplay</title>
+          <meta name="description" content="What is Sparkplay, why does it exist, and how do you learn by playing games" />
       </Head>
 
 

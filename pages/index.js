@@ -1,32 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import React from  'react';
+import Link from "next/link"
 // import VizSensor from 'react-visibility-sensor';
 import Head from 'next/head'
 import PaddedContainer from '../src/components/Layout/PaddedContainer'
 import Button from "@mui/material/Button"
+import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import Game from '../src/components/Game/Game';
-import TopBar from '../src/components/Layout/TopBar';
-import BottomNav from '../src/components/Layout/BottomNav';
-import Unit from '../src/components/Unit';
-import { getGameData } from '../src/libs/utils';
+import Box from "@mui/material/Box"
 
-export const getStaticProps = () => {
-  
-  const gameData = getGameData()
-
-  // console.log("gameData", gameData);
-
-  return {
-    props: {
-      gameData,
-    },
-  };
-};
-
-
-const Home = ({gameData}) => {
-  // console.log({gameData})
+const Home = () => {
 
 
 
@@ -36,20 +19,76 @@ const Home = ({gameData}) => {
       <div>
 
         <Head>
-          <title></title>
-          <meta name="description" content="" />
-          <link rel="icon" href="/favicon.ico" />
+          <title>Home | Sparkplay</title>
+          <meta name="description" content="Learn Complex Electrical & Electronics Engineeering Concepts by playing fun trivia games" />
         </Head>
 
 
-        <TopBar />
-
-        <PaddedContainer>
-        <Unit gameData={gameData}/>
-        </PaddedContainer>
         
+        <Box sx={{
+          bgcolor: "primary.main",
 
-        <BottomNav />
+          width: "100%",
+          height: "100vh",
+           display: "flex",
+           flexDirection: "column",
+           alignItems: "center",
+           justifyContent: "center",
+
+        }}>
+        <PaddedContainer >
+          <Box sx={{
+          
+        }}>
+          <Typography variant="h1" sx={{
+            color: "primary.contrastText",
+            Weight: 800,
+            fontSize: "1.25rem",
+          }}>sparkplay</Typography>
+          
+          <Grid container item xs={12} sx={{
+            display: "flex",
+            textAlign: "center",
+            justifyContent: "center"
+          }}>
+            <Link href="/game" style={{
+              display: "inline-block",
+              width : "100%",
+              "& a": {
+                textDecoration: "none"
+              }
+            }}>
+            <Button variant="contained" sx={{
+          width: "80%",
+          maxWidth: "400px",
+          fontSize: "1rem",
+          bgcolor: "background.paper",
+            color: "primary.dark",
+            
+            my: 2,
+            border: "3px solid",
+            borderColor: "primary.dark",
+
+          "&:hover": {
+            bgcolor: "background.paper",
+            color: "primary.dark",
+            border: "3px solid",
+            borderColor: "primary.dark",
+            outline: "none",
+            boxShadow: "none",
+          }
+        }}>
+          Enter Game
+        </Button>
+            </Link>
+         </Grid>
+          </Box>
+          
+         
+         
+          
+        </PaddedContainer>
+        </Box>
 
         
 

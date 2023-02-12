@@ -144,9 +144,9 @@ theme = createTheme(theme, {
                 box-sizing: inherit;
             }
 
-          a {
-          text-decoration: "none"
-          }
+            a {
+              text-decoration: none
+            }
         `,
     },
     MuiAppBar: {
@@ -182,7 +182,8 @@ theme = createTheme(theme, {
             background: "#1cb0f6",
             [theme.breakpoints.down('sm')]: {
                 fontSize: "1rem",
-            }
+            },
+            boxShadow: "none",
         },
         outlined: {
             border: `2px solid #e5e5e5`,

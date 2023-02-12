@@ -43,10 +43,16 @@ const GameAnswerPopup = ({isCorrect, onContinue}) => {
             <Button variant="contained" onClick={handleContinue} sx={{
                 width: "100%",
                 bgcolor: isCorrect ?  "primary.dark" : "#ff4b4b",
+            
                 fontSize: "0.85rem",
                 fontWeight: 600,
                 boxShadow: isCorrect ? "0px 3px #3a9907" : "0px 3px #ce4242",
                 py: 1,
+
+                "&:hover": {
+                    bgcolor: isCorrect ?  "primary.dark" : "#ff4b4b",
+                    boxShadow: isCorrect ? "0px 3px #3a9907" : "0px 3px #ce4242",
+                }
             }}>continue</Button>
         </Box>
   )

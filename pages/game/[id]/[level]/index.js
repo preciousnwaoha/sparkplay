@@ -6,7 +6,7 @@ import PaddedContainer from '../../../../src/components/Layout/PaddedContainer'
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import Game from '../../../../src/components/Game/Game';
-import { getLevelData, getAllLevelsPaths, shuffle } from '../../../../src/libs/utils';
+import { getLevelData, getLevelGamesData, getAllLevelsPaths, shuffle,  } from '../../../../src/libs/utils';
 
 export const getStaticPaths = () => {
     const paths = getAllLevelsPaths()
@@ -20,12 +20,15 @@ export const getStaticPaths = () => {
   export const getStaticProps = ({ params }) => {
     // console.log("params", params);
     
-      const levelData = getLevelData(params.id, params.level)
+      const levelGamesData = getLevelGamesData(params.id, params.level)
+
+      const levelData = getLevelData(params.id)
   
       // console.log("levelData", levelData);
     
       return {
         props: {
+          levelGamesData,
           levelData,
           gameId: params.id,
           gameLevel: params.level
@@ -34,12 +37,12 @@ export const getStaticPaths = () => {
   };
 
 
-const Level = ({levelData, gameLevel, gameId}) => {
+const Level = ({levelGamesData, levelData, gameLevel, gameId}) => {
 
-    // console.log(levelData.games)
+    // console.log(levelGamesData.games)
 
 
-
+  // console.log({levelData})
 
   return (
     
@@ -47,15 +50,13 @@ const Level = ({levelData, gameLevel, gameId}) => {
       <div>
 
         <Head>
-          <title></title>
-          <meta name="description" content="" />
-          <link rel="icon" href="/favicon.ico" />
+        <title>Gameplay | Sparkplay</title>
+          <meta name="description" content="Learn Complex Electrical & Electronics Engineeering Concepts by playing fun trivia games" />
         </Head>
 
 
         <PaddedContainer>
-
-        <Game games={shuffle(levelData.games)} pointsPerGame={levelData.pointsPerGame}gameId={gameId} gameLevel={gameLevel}/>
+        <Game games={levelGamesData.games} pointsPerGame={levelGamesData.pointsPerGame}gameId={gameId} gameLevel={gameLevel}/>
 
         </PaddedContainer>
 

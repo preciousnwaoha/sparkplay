@@ -22,9 +22,8 @@ const Challenges = () => {
       <div>
 
         <Head>
-          <title></title>
-          <meta name="description" content="" />
-          <link rel="icon" href="/favicon.ico" />
+        <title>Challenges | Sparkplay</title>
+          <meta name="description" content="Learn Complex Electrical & Electronics Engineeering Concepts by playing fun trivia games" />
         </Head>
 
 

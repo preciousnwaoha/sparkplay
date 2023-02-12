@@ -56,9 +56,13 @@ export const getAllLevelsPaths = () => {
 
 
 
-export const getLevelData = (_game, _level) => {
+export const getLevelGamesData = (_game, _level) => {
   // console.log({_game}, {_level})
-  return DUMMY_GAME_DATA
+  return DUMMY_GAME_DATA[`unit-1`][`game-${_game}`][`level-${_level}`]
+}
+
+export const getLevelData = (_game) => {
+  return DUMMY_GAMES[_game]
 }
 
 export const getLevelsQuestions = async () => {
@@ -70,6 +74,20 @@ export const getLevelsQuestions = async () => {
   return response
 }
 
+
+export const getLevelGameOptions = (_game, _level, _answer) => {
+
+  const numberOfOptions = Math.ceil((Math.random() * 2))
+
+  // console.log({_game, _level})
+  
+
+  const wrongAnswers = shuffle(DUMMY_GAME_DATA[`unit-1`][`game-${_game}`][`level-${_level}`].answerOptions).filter(_ans => _ans !== _answer)
+
+  const answerSArray =  shuffle([_answer, ...wrongAnswers.slice(0, 2 + numberOfOptions)])
+
+  return answerSArray
+}
 
 
 /**
@@ -97,8 +115,9 @@ export const getAllFeeds = () => {
 
 // helpers
 
-export const shuffle = (array) => {
-  let currentIndex = array.length,  randomIndex;
+export function shuffle (array) {
+  let newArr = [...array]
+  let currentIndex = newArr.length,  randomIndex;
 
   // While there remain elements to shuffle.
   while (currentIndex != 0) {
@@ -108,9 +127,9 @@ export const shuffle = (array) => {
     currentIndex--;
 
     // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
+    [newArr[currentIndex], newArr[randomIndex]] = [
+      newArr[randomIndex], newArr[currentIndex]];
   }
 
-  return array
+  return newArr
 }

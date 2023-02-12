@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { sfxActions } from "../../store/sfx-slice";
+import { currentLevelActions } from "../../store/current-level-slice";
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Grid from "@mui/material/Grid"
@@ -10,7 +13,24 @@ import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import { useRouter } from 'next/router'
 
 const GameComplete = () => {
+    const dispatch = useDispatch()
+    const currentLevel = useSelector(state => state.currentLevel)
     const router = useRouter()
+
+
+    const  {points, score, playing, timeElapsed } = currentLevel
+
+    const handleContinue = () => {
+        dispatch(currentLevelActions.togglePlaying())
+        router.push('/game')
+    }
+
+    useEffect(() => {
+    //     dispatch(sfxActions.playSfx("game-complete"))
+    }, [dispatch])
+
+
+    console.log({timeElapsed, points, score, playing})
 
   return (
     <Box sx={{
@@ -57,7 +77,7 @@ const GameComplete = () => {
                         fontWeight: 700,
                         color: "secondary.main"
                     }}>
-                        <ElectricBoltIcon /> 33
+                        <ElectricBoltIcon /> {points}
                     </Box>
                 </Paper>
             </Grid> 
@@ -89,7 +109,7 @@ const GameComplete = () => {
                         fontWeight: 700,
                         color: "secondary.color1"
                     }}>
-                        <AccessTimeRoundedIcon /> 13:43
+                        <AccessTimeRoundedIcon /> {`${timeElapsed}`}
                     </Box>
                 </Paper>
             </Grid> 
@@ -107,7 +127,7 @@ const GameComplete = () => {
                         fontWeight: 700,
                         py: "4px",
                     }}>
-                        total xp
+                        score
                     </Typography>
                     <Box sx={{
                         borderRadius: "14px",
@@ -121,15 +141,13 @@ const GameComplete = () => {
                         fontWeight: 700,
                         color: "primary.dark"
                     }}>
-                     <CrisisAlertRoundedIcon  /> 87%
+                     <CrisisAlertRoundedIcon  /> {score}%
                     </Box>
                 </Paper>
             </Grid>
         </Grid>
 
-        <Button variant="contained" onClick={() => {
-            router.push('/')
-        }} sx={{
+        <Button variant="contained" onClick={handleContinue} sx={{
             bgcolor: "color1.main",
 
             "&:hover": {

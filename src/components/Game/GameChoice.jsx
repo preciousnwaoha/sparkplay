@@ -1,4 +1,7 @@
 import * as React from "react";
+import Image from "next/image"
+import { useDispatch } from "react-redux";
+import {sfxActions} from "../../store/sfx-slice";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import GameChoicePopup from "./GameChoicePopup"
@@ -12,9 +15,7 @@ import Link from "next/link"
 // import { useRouter } from "next/router";
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import UIfx from 'uifx'; 
-// import tickAudio from '../../../public/assets/sfx/interface-2.mp3';
-// const tick = new UIfx({asset: tickAudio});
+
 
 const GameChoiceCircularProgress = styled(CircularProgress)(({ theme }) => ({
   borderRadius: 5,
@@ -42,6 +43,8 @@ const GameChoiceCircularProgress = styled(CircularProgress)(({ theme }) => ({
 }));
 
 export default function GameChoice({name, id, image, color}) {
+    const dispatch = useDispatch();
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const [gameTipAnchorState, setGameTipAnchorState] = React.useState(false)
@@ -58,14 +61,14 @@ export default function GameChoice({name, id, image, color}) {
 
     const handleOpenPopover = (event) => {
       setAnchorEl(event.currentTarget);
-      // if (!!document) {
-      //   tick.volume(0.8).play()
-      //   }
+      dispatch(sfxActions.playSfx("game-choice-tap"));
     };;
 
     const handleClosePopover = () => {
         setAnchorEl(null);
     };
+
+    // console.log({documentType: typeof document, windowType: typeof window})
 
     const open = Boolean(anchorEl);
 
@@ -102,7 +105,21 @@ export default function GameChoice({name, id, image, color}) {
              height: "55px",
              borderRadius: "50%",
              bgcolor: `${color}.main`,
+
+            
         }}>
+          <Box sx={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+
+            "& img": {
+              objectFit: "contain"
+            }
+          }}>
+            <Image src={image} alt={name} fill />
+          </Box>
             
         </Paper>
       

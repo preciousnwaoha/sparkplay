@@ -7,10 +7,15 @@ import OutlinedFlagRoundedIcon from '@mui/icons-material/OutlinedFlagRounded';
 
 const GameOptions = ({options, onAnswer, hasAnswered}) => {
     const [selected, setSelected] = useState(null);
+    const [answer, setAnswer] = useState("");
 
     const handleAnswer = (_ans, _index) => {
-        onAnswer(_ans);
-        setSelected(_index);
+        if (!hasAnswered) {
+            setAnswer(_ans)
+            setSelected(_index);
+            onAnswer(_ans);
+            
+        }
     }
 
     useEffect(() => {
@@ -30,7 +35,7 @@ const GameOptions = ({options, onAnswer, hasAnswered}) => {
             my: 2,
         }}>
             {options.map((opt, index )=> {
-                return <Button variant="outlined" key={opt} onClick={() => {handleAnswer(opt, index)}} sx={{
+                return <Button variant="outlined" disabled={(hasAnswered && (opt.toLowerCase() !== answer.toLowerCase())) ? true : false} key={opt} onClick={() => {handleAnswer(opt, index)}} sx={{
                     display: "inline-block",
                     fontSize: "1rem",
                     mr: 1,

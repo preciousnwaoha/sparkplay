@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import GameHeader from '../Layout/GameHeader';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import Image from 'next/image';
-import TipPic from "../../../public/assets/imgs/wall2.png"
+import TipPic from "../../../public/assets/imgs/electrical-2.png"
 import PaddedContainer from '../Layout/PaddedContainer';
 
 
@@ -56,6 +56,7 @@ export default function GameTip({onToggleGameTip, onClosePopup,  gameId, gameNam
             overflow: "hidden",
             height: "150px",
             width: "100%",
+            bgcolor: "secondary.main",
             border: "2px solid",
             borderColor: "grey.gray3",
             borderRadius: 2,
